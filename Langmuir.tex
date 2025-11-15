@@ -1,0 +1,100 @@
+\documentclass[12pt]{article}  
+%\include{rus.tex}
+% пакеты
+\usepackage{geometry}
+\usepackage{ucs} 
+\usepackage{amsmath} % Для математических символов
+\usepackage{graphicx} % Для графики (не обязательно для этой таблицы, но часто используется)
+\usepackage{rotating}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{booktabs} % для красивых горизонтальных линий в таблице
+\usepackage{float}    % Для опции [H] для таблиц
+\usepackage{array}    % Для расширенных возможностей таблиц
+\usepackage{booktabs} % Для красивых горизонтальных линий в таблице
+\usepackage{siunitx}  % Для правильного отображения единиц измерения
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{blindtext}
+\usepackage{multicol}
+\usepackage{ulem}
+\usepackage{stackrel} 
+
+
+\usepackage[utf8x]{inputenc} % Включаем поддержку UTF8  
+\usepackage[russian]{babel}  % Включаем пакет для поддержки русского языка  
+
+\begin{document}
+	\section{Вывод закона 3/2 Ленгмюра}
+	Если предположить, что электроды вакуумной трубки плоские, а температура катода постоянная, то потенциал электрического поля будет зависеть только от одной координаты $x$, направленной вдоль вакуумной трубки от катода к аноду.
+	
+	Используем одно из уравнений Максвелла в дифференциальной форме:
+	\[ \text{div} E = \frac{\rho}{\mathcal{E}_0} \]
+	
+	где $\rho$ - объёмная плотность заряда. Спроецируем это уравнение на ось $x$:
+	
+	\begin{align} \label{Langmuir-ur1}
+		\frac{dE}{dx} = - \frac1{\mathcal{E}_0} e n
+	\end{align}
+	
+	Знак минус учитывает, что эмиттируемые электроны имеют отрицательный заряд, $\mathcal{E}_0$ - электрическая постоянная, $n$ - концентрация электронов, $E$ - напряжённость электрического поля. 
+	
+	Работа по перемещению единичного точечного положительного заряда из одной точки поля в другую вдоль оси $x$ при условии, что точки расположены бесконечно близко друг к другу $x_2 - x_1 = dx$, равна $E_x dx$. Та же работа равна $\phi_1 - \phi_2 = -dU$. Приравняв оба выражения, можем записать:
+	
+	\begin{align} \label{Langmuir-ur2}
+		E = - \frac{dU}{dx}
+	\end{align}
+	
+	Выразим напряжённость $E$ через потенциал $U$, с помощью формулы \eqref{Langmuir-ur2}. Концентрацию электронов выразим через плотность тока эмиссии: $j = e n U$, а скорость электронов - из закона сохранения энергии: $mu^2 / 2 = eU$, где $u$ - дрейфовая скорость электронов. 
+	\begin{align} \label{Langmuir-ur3}
+		n = \frac{j}{eu} 
+	\end{align}
+	\begin{align} \label{Langmuir-ur4}
+		u = \sqrt{ \frac{2eU}m } 
+	\end{align}
+	
+	Тогда уравнение \eqref{Langmuir-ur1} с учётом \eqref{Langmuir-ur2}, \eqref{Langmuir-ur3} и \eqref{Langmuir-ur4} принимает вид:
+	\begin{align*}
+		\frac{d}{dx} \frac{dU}{dx} = - \frac1{\mathcal{E}_0} e \frac{j}{e} \sqrt{m}{2eU}
+	\end{align*}
+	
+	\begin{align} \label{Langmuir-ur5}
+		\frac{d^2U}{dx^2} = \frac{j}{\mathcal{E}_0} \sqrt{\frac{m}{2e}} U^{-\frac12}
+	\end{align}
+	
+	Решение дифференциального уравнения второго порядка \eqref{Langmuir-ur5} будем искать при граничных условиях $\lim\limits_{x \to 0}U = \lim\limits_{x \to 0}E = 0$. Если бы электрическое поле на границе катода было больше нуля, то все электроны, испускаемые катодом, увлекались бы этим полем к аноду, и термоэлектронный ток достигал бы насыщения при любых напряжениях на вакуумной трубке. Коэффициент перед $U^{-1/2}$ обозначим за $a$:
+	\begin{align} \label{Langmuir-ur6}
+		a^2 = \frac{j}{\mathcal{E}} \sqrt{\frac{m}{2e}}
+	\end{align}
+	
+	\begin{align}
+		\frac{d^2U}{dx^2} = a^2 U^{-\frac12}
+	\end{align}
+	Введём замену:
+	\[ p = \frac{dU}{dx}, \qquad \frac{d^2U}{dx^2} = p \frac{dp}{dU} \]
+	Тогда:
+	\begin{align*}
+		p \frac{dp}{dU} = a^2 U^{-\frac12} \\
+		p dp = a^2 U^{-\frac12} dU \\
+		\frac{p^2}{2} = 2 a^2 U^{\frac12} \\
+		p = 2 a U^{\frac14}
+	\end{align*}
+	\begin{align*}
+		\frac{dU}{U^{1/4}} = 2 a dx \\
+		\frac43 U^{\frac34} = 2ax
+	\end{align*}
+	\begin{align} \label{Langmuir-ur7}
+		a = \frac{2U^{3/4}}{3x}
+	\end{align}
+	Подставим \eqref{Langmuir-ur7} в \eqref{Langmuir-ur6} и пологая, что $x = l$, где $l$ - расстояние между анодом и катодом, получаем:
+	\begin{align} \label{Langmuir-ur9}
+		j = \frac{4\mathcal{E}_0}{9 l^2} \sqrt{\frac{2e}{m}} U^{-\frac32}
+	\end{align}
+	Учитывая, что коэффициент перед $U$ - константа, зависящая только от геометрических свойств прибора и фундаментальных постоянных(обозначим её $B$), то уравнение \eqref{Langmuir-ur9} можно переписать в виде: 
+	\begin{align} \label{Langmuir_fin}
+		j = BU^{3/2}
+	\end{align}
+	
+\end{document}
